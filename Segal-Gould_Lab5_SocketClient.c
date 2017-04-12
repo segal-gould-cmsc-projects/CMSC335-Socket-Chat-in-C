@@ -45,17 +45,17 @@ int main(int argc, char **argv) {
 
     while (strcmp(recvline, QUIT) != 0) {
         bzero(sendline, 100);
-	bzero(recvline, 100);
-	time_t first = time(0); // Get the time before user input.
+        bzero(recvline, 100);
+        time_t first = time(0); // Get the time before user input.
         strftime(buff, 100, "%Y-%m-%d %H:%M:%S", localtime(&first)); // Format the time as a String.
-	printf("Client [%s]: ", buff); // Print the initial time for the message being sent.
+        printf("Client [%s]: ", buff); // Print the initial time for the message being sent.
         fgets(sendline, 100, stdin); // Wait for user input for message to send.
-	time_t second = time(0); // Get the time after input.
+        time_t second = time(0); // Get the time after input.
         strftime(buff, 100, "%Y-%m-%d %H:%M:%S", localtime(&second)); // Format the time as a String.
-	printf("\nMessage sent at %s\n", buff); // Print the corrected time the message was input.
+        printf("\nMessage sent at %s\n", buff); // Print the corrected time the message was input.
         write(sockfd, sendline, strlen(sendline) + 1);
         read(sockfd, recvline, 100);
-	time_t third = time(0); // Get the time after Server response.
+        time_t third = time(0); // Get the time after Server response.
         strftime(buff, 100, "%Y-%m-%d %H:%M:%S", localtime(&third)); // Format the time as a String.
         printf("Server [%s]: %s\n", buff, recvline); // Print the message being received and the time.
     }
