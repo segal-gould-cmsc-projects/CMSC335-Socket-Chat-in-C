@@ -47,17 +47,17 @@ int main(int argc, char **argv) {
     while (strcmp(sendline, QUIT) != 0) { // Check if the message sent from the Server is "QUIT," and if so, do.
         bzero(recvline, 100);
         read(comm_fd, recvline, 100);
-	time_t first = time(0); // Calculate the system time following the response.
+        time_t first = time(0); // Calculate the system time following the response.
         strftime(buff, 100, "%Y-%m-%d %H:%M:%S", localtime(&first)); // Format the time as a String.
         printf("Client [%s]: %s\n", buff, recvline); // Print the Client's response along with the time.
         bzero(sendline, 100);
-	time_t second = time(0); // Calculate the time prior to user input.
+        time_t second = time(0); // Calculate the time prior to user input.
         strftime(buff, 100, "%Y-%m-%d %H:%M:%S", localtime(&second)); // Format the time as a String.
-	printf("Server [%s]: ", buff); // Print the initial time for the message sent from the Server to the Client.
+        printf("Server [%s]: ", buff); // Print the initial time for the message sent from the Server to the Client.
         fgets(sendline, 100, stdin); // Get user input to send message from Server to Client.
-	time_t third = time(0); // Calculate the time following user input.
+        time_t third = time(0); // Calculate the time following user input.
         strftime(buff, 100, "%Y-%m-%d %H:%M:%S", localtime(&third)); // Format the time as a String.
-	printf("\nMessage sent at %s\n", buff); // Print the corrected time the message was input.
+        printf("\nMessage sent at %s\n", buff); // Print the corrected time the message was input.
         write(comm_fd, sendline, strlen(sendline) + 1);
     }
     printf("\n*****QUITTING PROGRAM*****\n");
